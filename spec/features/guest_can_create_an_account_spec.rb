@@ -17,12 +17,15 @@ describe "Visit new uer path" do
       fill_in "user[state]", with: user.state
       fill_in "user[zip_code]", with: user.zip_code
       fill_in "user[email]", with: user.email
+      fill_in "user[phone]", with: user.phone
+      fill_in "user[password]", with: user.password
+      fill_in "user[password_confirmation]", with: user.password
       fill_in "user[picture]", with: user.picture
       select("#{cat_1.name}", from: 'user[category_id]')
 
       click_on "Create Account!"
 
-      expect(current_path).to eq(user_path(user))
+      expect(current_path).to eq(user_path(User.first))
       expect(page).to have_content("Hey #{user.first_name}")
     end
   end
